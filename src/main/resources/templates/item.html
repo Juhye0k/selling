@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        .field-error {
+ border-color: #dc3545;
+ color: #dc3545;
+ }
+    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Shop Homepage - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/bootstrap/items/assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/bootstrap/items/css/styles.css" rel="stylesheet" />
+
+    <!-- 추가된 스크립트 -->
+    <script th:inline="javascript">
+        window.onload = function() {
+            showAddProductForm();
+        };
+
+        function showAddProductForm() {
+            document.getElementById('addProductForm').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand"  th:href="@{/items}">금오 마켓</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page"  th:href="@{/items}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">All Products</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                        <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <span class="welcome" th:text="|환영합니다!          ${session.loginMember.loginId} 님|"></span>
+
+            <button class="btn btn-outline-dark" th:onclick="|location.href=`@{/items/logout}`|" type="button">
+                <i class=" me-1"></i>
+                로그아웃
+                <span class="text-white ms-1 rounded-pill">0</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Header -->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">금오 마켓에 오신것을 환영합니다!</h1>
+            <p class="lead fw-normal text-white-50 mb-0">판매하고 싶은 물품들을 자유롭게 올려주세요.</p>
+        </div>
+    </div>
+</header>
+
+<!-- Section -->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <!-- 상품 등록 폼 -->
+        <div id="addProductForm">
+            <h2>Add Product</h2>
+            <!-- 상품 정보 입력 폼 -->
+            <form  th:action th:object="${item}" method="post">
+                <div class="mb-3">
+                    <label for="productName" class="form-label" >상품 이름</label>
+                    <input type="text" class="form-control" th:field="*{itemName}"id="productName"  required>
+
+                </div>
+                <div class="mb-3">
+                    <label for="productPrice" class="form-label" >가격</label>
+                    <input type="number" class="form-control" th:field="*{price}" id="productPrice"required>
+
+                </div>
+                <div class="mb-3">
+                    <label for="productQuantity" class="form-label" >수량</label>
+                    <input type="number" class="form-control"  th:field="*{quantity}"id="productQuantity"  required>
+
+                </div>
+                <button type="submit" class="btn btn-primary" >등록</button>
+            </form>
+        </div>
+
+        <!-- 상품 목록 등 나머지 내용은 그대로 유지 -->
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+</footer>
+
+<!-- Bootstrap core JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS -->
+<script src="js/scripts.js"></script>
+</body>
+</html>
